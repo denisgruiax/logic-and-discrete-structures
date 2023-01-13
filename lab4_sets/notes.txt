@@ -1,0 +1,18 @@
+(*
+    Is it possible to pattern match against a Set like as against a List? For example consider the following code:
+
+    module MySet = Set.Make (struct ... end)
+    match MySet.empty with
+    | MySet () -> "Empty Set"
+    | MySet (x) -> "Set with exactly one element"
+    | MySet (x, y, _) -> "Set with at least two elements"
+*)
+
+(*
+    No. The implementation of Set is hidden therefore you cannot directly pattern-match the value. 
+    You have to use functions defined in Set module to deconstruct it. Check set.mli. 
+    Without much details of your problem, we cannot say which function you should use. 
+    Probably choose and split, or iter or fold, or simply elements.
+    Set requires an ordering of element values and it is implemented as a binary tree where the elements are sorted in that order. 
+    Therefore these functions of Set should work always the same for equal sets.
+*)
